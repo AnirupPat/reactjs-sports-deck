@@ -1,11 +1,9 @@
 import classes from "./AddSportForm.module.css";
+import Input from '../UI/Input/Input';
 
 const AddSportForm = (props) => {
   return (
-    <div>
-      <label>Sport</label>
-      <input />
-    </div>
+    <Input />
   );
 };
 
