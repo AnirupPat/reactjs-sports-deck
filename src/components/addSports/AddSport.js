@@ -4,9 +4,9 @@ import AddSportForm from "./AddSportForm";
 const AddSport = (props) => {
   return (
     <div className={classes.div}>
-    <Card className={classes.card}>
-    <AddSportForm />
-  </Card>
+      <Card className={classes.card}>
+        <AddSportForm />
+      </Card>
     </div>
   );
 };
