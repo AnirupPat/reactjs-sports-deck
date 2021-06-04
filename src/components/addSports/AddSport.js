@@ -1,10 +1,13 @@
 import classes from "./AddSport.module.css";
 import Card from "../UI/Card/Card";
+import AddSportForm from "./AddSportForm";
 const AddSport = (props) => {
   return (
-    <Card>
-      <p>Hello</p>
-    </Card>
+    <div className={classes.div}>
+    <Card className={classes.card}>
+    <AddSportForm />
+  </Card>
+    </div>
   );
 };
 
