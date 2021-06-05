@@ -7,18 +7,15 @@ import useHttp from "./hooks/use-http";
 function App() {
   const [newSport, setNewSport] = useState([]);
 
+  const { sendRequest: fetchRequestHandler } = useHttp();
+
   const fetchSportsDetails = async () => {
-    const request = await fetch(
-      "https://react-https-344f0-default-rtdb.firebaseio.com/sports.json"
+    fetchRequestHandler(
+      {
+        url: "https://react-https-344f0-default-rtdb.firebaseio.com/sports.json",
+      },
+      onFetchSuccess
     );
-    if (request.ok) {
-      const data = await request.json();
-      let sportsArray = [];
-      for (const key in data) {
-        sportsArray.push(data[key].sport);
-      }
-      setNewSport(sportsArray);
-    }
   };
 
   useEffect(() => {
@@ -27,19 +24,30 @@ function App() {
 
   const onPostSuccess = (sport) => {
     setNewSport([...newSport, sport.sport]);
-  }
+  };
+
+  const onFetchSuccess = (sport) => {
+    let sportsArray = [];
+    for (const key in sport) {
+      sportsArray.push(sport[key].sport);
+    }
+    setNewSport(sportsArray);
+  };
 
   const { sendRequest: sendRequestHandler } = useHttp();
 
   const addSportHandler = async (sport) => {
-    sendRequestHandler({
-      url: "https://react-https-344f0-default-rtdb.firebaseio.com/sports.json",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    sendRequestHandler(
+      {
+        url: "https://react-https-344f0-default-rtdb.firebaseio.com/sports.json",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: { sport },
       },
-      body: {sport},
-    }, onPostSuccess);
+      onPostSuccess
+    );
   };
   return (
     <Fragment>
