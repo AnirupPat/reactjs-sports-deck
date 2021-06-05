@@ -1,14 +1,27 @@
-import { Fragment, useState, useMemo } from 'react';
+import { Fragment, useState, useMemo, useEffect } from 'react';
 import './App.css';
 import AddSport from './components/addSports/AddSport';
 import SportsLog from './components/sportsLog/SportsLog';
 
 function App() {
-  const sportsArray = useMemo(() => {
-    return ["Cricket", "Badminton", "Tennis","Cricket", "Badminton", "Tennis","Cricket", "Badminton", "Tennis"];
-    // "Cricket", "Badminton", "Tennis","Cricket", "Badminton", "Tennis","Cricket", "Badminton", "Tennis"
-    }, []);
-  const [newSport, setNewSport] = useState(sportsArray);
+  const [newSport, setNewSport] = useState([]);
+
+  const fetchSportsDetails = async() => {
+    const request = await fetch('https://react-https-344f0-default-rtdb.firebaseio.com/sports.json');
+    if(request.ok) {
+      const data = await request.json();
+      let sportsArray = [];
+      for(const key in data) {
+        sportsArray.push(data[key].sport)
+      }
+      setNewSport(sportsArray);
+    }
+    
+  }
+
+  useEffect(()=> {
+    fetchSportsDetails();
+  }, []);
   
   const addSportHandler = async(sport) => {
     const request = await fetch('https://react-https-344f0-default-rtdb.firebaseio.com/sports.json', {
@@ -20,10 +33,9 @@ function App() {
         sport
       })
     });
-
-    const data = request.json();
-    console.log(data);
-    setNewSport([...newSport, [sport]]);
+    if(request.ok) {
+      setNewSport([...newSport, [sport]]);
+    }
   }
   return (
     <Fragment>
