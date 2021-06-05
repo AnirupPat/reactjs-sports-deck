@@ -1,15 +1,16 @@
 import classes from "./AddSportForm.module.css";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
+import { createRef } from "react";
 
 const AddSportForm = (props) => {
-  const buttonChangeHandler = (value) => {
-    console.log('clicked')
-    // props.addSport(value);
+  const inputControl = createRef();
+  const buttonChangeHandler = () => {
+    props.addSport(inputControl.current.value);
   };
   return (
     <div className={classes.div}>
-      <Input />
+      <Input ref={inputControl} />
       <Button onClick={buttonChangeHandler} title="Click" />
     </div>
   );

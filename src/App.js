@@ -10,7 +10,7 @@ function App() {
   const [newSport, setNewSport] = useState(sportsArray);
   
   const addSportHandler = sport => {
-    setNewSport([...sportsArray, {sport}]);
+    setNewSport([...newSport, [sport]]);
   }
   return (
     <Fragment>
