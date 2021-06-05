@@ -1,0 +1,14 @@
+.button {
+    width: 20%;
+}
+
+.button button {
+    height: 100%;
+    border-radius: 15px;
+    width: 100%;
+    font-family: fangsong;
+    font-size: larger;
+    font-weight: bolder;
+    background-color: black;
+    color: white;
+}
