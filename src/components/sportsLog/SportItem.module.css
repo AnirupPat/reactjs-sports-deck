@@ -8,3 +8,7 @@
     font-style: italic;
     font-size: larger;
 }
+
+.div:hover {
+    transform: scale(1.2); 
+}
